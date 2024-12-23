@@ -1,14 +1,18 @@
 import React from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import "./PopularMovieSlide.style.css";
-import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
+import "./UpcomingMovieSlide.style.css";
+import { useUpcomingMoviesQuery } from "../../../../hooks/useUpcomingMovies";
 import { Alert } from "react-bootstrap";
+import Carousel from "react-multi-carousel";
 import MovieCard from "../MovieCard/MovieCard";
 
-const PopularMovieSlide = () => {
-  const { data, isLoaing, isError, error } = usePopularMoviesQuery();
-  console.log(data);
+const UpcomingMovieSlide = () => {
+  const { data, isLoading, isError, error } = useUpcomingMoviesQuery();
+  if (isLoading) {
+    return <h1>Loading</h1>;
+  }
+  if (isError) {
+    return <Alert>{error.message}</Alert>;
+  }
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -23,15 +27,9 @@ const PopularMovieSlide = () => {
       items: 1,
     },
   };
-  if (isLoaing) {
-    return <h1>Loading</h1>;
-  }
-  if (isError) {
-    return <Alert varient="danger">{error.message}</Alert>;
-  }
   return (
     <div>
-      <h3>Popular movies</h3>
+      <h3>UpcomingMovieSlide</h3>
       <Carousel
         infinite={true}
         centerMode={true}
@@ -47,4 +45,4 @@ const PopularMovieSlide = () => {
   );
 };
 
-export default PopularMovieSlide;
+export default UpcomingMovieSlide;
