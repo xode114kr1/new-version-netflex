@@ -14,7 +14,7 @@ const PopularMovieSlide = () => {
     return <Alert varient="danger">{error.message}</Alert>;
   }
   if (!data) {
-    return <Alert variant="warning">No movies available.</Alert>;
+    return <div></div>;
   }
   return (
     <div>
