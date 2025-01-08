@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSearchMovieQuery } from "../../hooks/useSearchMovie";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
@@ -11,6 +11,7 @@ import "./Moviespage.style.css";
 // 2. ketword를 입력해서 온 경우 => keyword와 관련된 영화들을 보여줌
 
 const Moviespage = () => {
+  const navigate = useNavigate();
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState(1);
   const keyword = query.get("q");
@@ -18,6 +19,10 @@ const Moviespage = () => {
     keyword,
     page,
   });
+
+  const handleCardClick = (movie) => {
+    navigate(`/movies/${movie.id}`);
+  };
 
   const handlePageChange = ({ selected }) => {
     setPage(selected + 1);
@@ -47,7 +52,7 @@ const Moviespage = () => {
           <Row>
             {data?.results.map((movie, index) => (
               <Col key={index} lg={4} xs={12}>
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie} handleCardClick={handleCardClick} />
               </Col>
             ))}
           </Row>

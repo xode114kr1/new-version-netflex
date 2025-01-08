@@ -3,7 +3,7 @@ import "./MovieCard.style.css";
 import { Badge } from "react-bootstrap";
 import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
 
-const MovieCard = ({ movie, index }) => {
+const MovieCard = ({ movie, index, handleCardClick }) => {
   const { data: genreData } = useMovieGenreQuery();
 
   const showGenre = (genreIdList) => {
@@ -23,6 +23,7 @@ const MovieCard = ({ movie, index }) => {
           ")",
       }}
       className="movie-card"
+      onClick={() => handleCardClick(movie)}
     >
       <div className="overlay">
         <h3>{movie.title}</h3>
