@@ -74,6 +74,14 @@
     gap: 1rem;
 }
 
+.preview-button-contanier{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+
+
 .review-button{
     width: 300px;
     height: 40px;
@@ -84,8 +92,13 @@
     transition: background-color 0.3s ease;
 }
 
+.review-button:hover{
+    background-color: rgb(12, 12, 12);
+}
+
 .review-button.open{
     background-color: rgb(194, 194, 194);
+    border: none;
     color: black;
 }
 
@@ -105,3 +118,9 @@
 .review-content{
     padding-left: 10px;
 }
+
+@media (max-width: 992px) {
+    .movie-image {
+      display: none;
+    }
+  }

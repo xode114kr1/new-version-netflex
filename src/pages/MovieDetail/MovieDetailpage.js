@@ -32,12 +32,16 @@ const MovieDetailpage = () => {
     return <Alert variant="danger">{error}</Alert>;
   }
 
+  const handlePreviewButton = () => {};
+
   const handleReviewButton = () => {
     setIsReviewShow(!isReviewShow);
+    setIsRecommendationMovieShow(false);
   };
 
   const handleRecommadationButton = () => {
     setIsRecommendationMovieShow(!isRecommendationMovieShow);
+    setIsReviewShow(false);
   };
 
   return (
@@ -46,10 +50,12 @@ const MovieDetailpage = () => {
         <Col
           lg={4}
           sm={0}
+          className="movie-image"
           style={{
             background: `url("http://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}") no-repeat center`,
           }}
         ></Col>
+
         <Col lg={8} sm={12} className="detail-contanier">
           <div className="detail-genre">
             {movie.genres.map((genre, index) => (
@@ -61,7 +67,9 @@ const MovieDetailpage = () => {
           <div className="detail-vote">
             <div className="vote-icon">V</div>
             <div>{movie.vote_average}</div>
-            <div className="vote-icon">P</div>
+            <div className="vote-icon" style={{ marginLeft: "20px" }}>
+              P
+            </div>
             <div>{movie.popularity}</div>
           </div>
           <div className="detail-overview">{movie.overview}</div>
@@ -83,6 +91,12 @@ const MovieDetailpage = () => {
           </div>
         </Col>
       </Row>
+
+      <div className="preview-button-contanier">
+        <button className="review-button" onClick={handlePreviewButton}>
+          Preview
+        </button>
+      </div>
       <div className="button-contanier">
         <button
           className={`review-button ${isReviewShow ? "open" : ""}`}
@@ -97,7 +111,6 @@ const MovieDetailpage = () => {
           Recommendation Movie ({Object.keys(recommendationMovie).length})
         </button>
       </div>
-
       <Row>
         <Col style={{ display: isReviewShow ? "block" : "none" }}>
           {reviews.map((review, index) => (
