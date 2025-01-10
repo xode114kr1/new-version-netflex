@@ -13,7 +13,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Homapage />} />

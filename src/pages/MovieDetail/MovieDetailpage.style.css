@@ -66,3 +66,40 @@
     background: linear-gradient(to left, #ff0000, #420000);
     margin-right: 10px;
 }
+
+.button-contanier{
+    display: flex;
+    justify-content: center;
+}
+
+.review-button{
+    width: 100px;
+    height: 40px;
+    background-color: inherit;
+    border: 2px solid rgb(105, 105, 105);
+    border-radius: 15px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.review-button.open{
+    background-color: rgb(194, 194, 194);
+    color: black;
+}
+
+.review-contanier{
+    margin: 10px 0;
+    padding: 15px;
+    border: 2px solid rgb(158, 19, 19);
+    border-radius: 15px;
+}
+
+.review-author{
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.review-content{
+    padding-left: 10px;
+}

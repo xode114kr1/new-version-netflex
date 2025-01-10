@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MovieDetailpage.style.css";
 import { useParams } from "react-router-dom";
 import { useFineMovieByIdQuery } from "../../hooks/useFindMovieById";
 import { Alert, Col, Container, Row } from "react-bootstrap";
+import { useReviewByIdQuery } from "../../hooks/useReviewById";
 
 const MovieDetailpage = () => {
+  const [isReviewShow, setIsReviewShow] = useState(false);
+  console.log(isReviewShow);
   const { id } = useParams();
   const { data: movie, isLoaing, isError, error } = useFineMovieByIdQuery(id);
+  const { data: reviews } = useReviewByIdQuery(id);
 
   const budget = movie?.budget;
   const formattedBudget = new Intl.NumberFormat("en-US").format(budget);
   const revenue = movie?.revenue;
   const formattedRevenue = new Intl.NumberFormat("en-US").format(revenue);
 
-  if (isLoaing || !movie) {
+  if (isLoaing || !movie || !reviews) {
     return <h1>Loading</h1>;
   }
   if (isError) {
     return <Alert variant="danger">{error}</Alert>;
   }
   console.log(movie);
+  console.log("review :", reviews);
   return (
     <Container style={{ padding: "2rem" }}>
       <Row style={{ height: "70vh" }}>
@@ -63,9 +68,23 @@ const MovieDetailpage = () => {
           </div>
         </Col>
       </Row>
+      <div className="button-contanier">
+        <button
+          className={`review-button ${isReviewShow ? "open" : ""}`}
+          onClick={() => setIsReviewShow(!isReviewShow)}
+        >
+          review
+        </button>
+      </div>
+
       <Row>
-        <Col>
-          <div>Review</div>
+        <Col style={{ display: isReviewShow ? "block" : "none" }}>
+          {reviews.map((review, index) => (
+            <div className="review-contanier">
+              <div className="review-author">{review.author}</div>
+              <div className="review-content">{review.content}</div>
+            </div>
+          ))}
         </Col>
       </Row>
     </Container>
