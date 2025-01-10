@@ -6,12 +6,15 @@ import { Alert, Col, Container, Row } from "react-bootstrap";
 import { useReviewByIdQuery } from "../../hooks/useReviewById";
 import { useRecommendationMovieByIdQuery } from "../../hooks/useRecommedationMovieById";
 import MovieCard from "../../common/MovieCard/MovieCard";
+import PreviewModal from "./PreviewModal";
 
 const MovieDetailpage = () => {
   const navigate = useNavigate();
   const handleCardClick = (movie) => {
     navigate(`/movies/${movie.id}`);
   };
+
+  const [isModalShow, setIsModalShow] = useState(false);
   const [isReviewShow, setIsReviewShow] = useState(false);
   const [isRecommendationMovieShow, setIsRecommendationMovieShow] =
     useState(false);
@@ -32,8 +35,6 @@ const MovieDetailpage = () => {
     return <Alert variant="danger">{error}</Alert>;
   }
 
-  const handlePreviewButton = () => {};
-
   const handleReviewButton = () => {
     setIsReviewShow(!isReviewShow);
     setIsRecommendationMovieShow(false);
@@ -44,8 +45,20 @@ const MovieDetailpage = () => {
     setIsReviewShow(false);
   };
 
+  const handleModalClose = () => {
+    setIsModalShow(false);
+  };
+
+  const handlePreviewButton = () => {
+    setIsModalShow(true);
+  };
+
   return (
     <Container style={{ padding: "2rem" }}>
+      <PreviewModal
+        isModalShow={isModalShow}
+        handleModalClose={handleModalClose}
+      />
       <Row style={{ height: "70vh" }}>
         <Col
           lg={4}
@@ -93,19 +106,19 @@ const MovieDetailpage = () => {
       </Row>
 
       <div className="preview-button-contanier">
-        <button className="review-button" onClick={handlePreviewButton}>
+        <button className="low-button" onClick={handlePreviewButton}>
           Preview
         </button>
       </div>
       <div className="button-contanier">
         <button
-          className={`review-button ${isReviewShow ? "open" : ""}`}
+          className={`low-button ${isReviewShow ? "open" : ""}`}
           onClick={handleReviewButton}
         >
           Review ({Object.keys(reviews).length})
         </button>
         <button
-          className={`review-button ${isRecommendationMovieShow ? "open" : ""}`}
+          className={`low-button ${isRecommendationMovieShow ? "open" : ""}`}
           onClick={handleRecommadationButton}
         >
           Recommendation Movie ({Object.keys(recommendationMovie).length})

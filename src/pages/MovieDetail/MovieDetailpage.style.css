@@ -82,7 +82,7 @@
 }
 
 
-.review-button{
+.low-button{
     width: 300px;
     height: 40px;
     background-color: inherit;
@@ -92,11 +92,11 @@
     transition: background-color 0.3s ease;
 }
 
-.review-button:hover{
+.low-button:hover{
     background-color: rgb(12, 12, 12);
 }
 
-.review-button.open{
+.low-button.open{
     background-color: rgb(194, 194, 194);
     border: none;
     color: black;
