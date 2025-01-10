@@ -1,30 +1,45 @@
 import React, { useState } from "react";
 import "./MovieDetailpage.style.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFineMovieByIdQuery } from "../../hooks/useFindMovieById";
 import { Alert, Col, Container, Row } from "react-bootstrap";
 import { useReviewByIdQuery } from "../../hooks/useReviewById";
+import { useRecommendationMovieByIdQuery } from "../../hooks/useRecommedationMovieById";
+import MovieCard from "../../common/MovieCard/MovieCard";
 
 const MovieDetailpage = () => {
+  const navigate = useNavigate();
+  const handleCardClick = (movie) => {
+    navigate(`/movies/${movie.id}`);
+  };
   const [isReviewShow, setIsReviewShow] = useState(false);
-  console.log(isReviewShow);
+  const [isRecommendationMovieShow, setIsRecommendationMovieShow] =
+    useState(false);
   const { id } = useParams();
   const { data: movie, isLoaing, isError, error } = useFineMovieByIdQuery(id);
   const { data: reviews } = useReviewByIdQuery(id);
+  const { data: recommendationMovie } = useRecommendationMovieByIdQuery(id);
 
   const budget = movie?.budget;
   const formattedBudget = new Intl.NumberFormat("en-US").format(budget);
   const revenue = movie?.revenue;
   const formattedRevenue = new Intl.NumberFormat("en-US").format(revenue);
 
-  if (isLoaing || !movie || !reviews) {
+  if (isLoaing || !movie || !reviews || !recommendationMovie) {
     return <h1>Loading</h1>;
   }
   if (isError) {
     return <Alert variant="danger">{error}</Alert>;
   }
-  console.log(movie);
-  console.log("review :", reviews);
+
+  const handleReviewButton = () => {
+    setIsReviewShow(!isReviewShow);
+  };
+
+  const handleRecommadationButton = () => {
+    setIsRecommendationMovieShow(!isRecommendationMovieShow);
+  };
+
   return (
     <Container style={{ padding: "2rem" }}>
       <Row style={{ height: "70vh" }}>
@@ -71,9 +86,15 @@ const MovieDetailpage = () => {
       <div className="button-contanier">
         <button
           className={`review-button ${isReviewShow ? "open" : ""}`}
-          onClick={() => setIsReviewShow(!isReviewShow)}
+          onClick={handleReviewButton}
         >
-          review
+          Review ({Object.keys(reviews).length})
+        </button>
+        <button
+          className={`review-button ${isRecommendationMovieShow ? "open" : ""}`}
+          onClick={handleRecommadationButton}
+        >
+          Recommendation Movie ({Object.keys(recommendationMovie).length})
         </button>
       </div>
 
@@ -85,6 +106,20 @@ const MovieDetailpage = () => {
               <div className="review-content">{review.content}</div>
             </div>
           ))}
+        </Col>
+        <Col style={{ display: isRecommendationMovieShow ? "block" : "none" }}>
+          <Row>
+            {recommendationMovie.map((movie, index) => (
+              <Col>
+                {" "}
+                <MovieCard
+                  movie={movie}
+                  index={index}
+                  handleCardClick={handleCardClick}
+                />
+              </Col>
+            ))}
+          </Row>
         </Col>
       </Row>
     </Container>
