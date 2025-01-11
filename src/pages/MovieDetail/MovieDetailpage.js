@@ -6,7 +6,7 @@ import { Alert, Col, Container, Row } from "react-bootstrap";
 import { useReviewByIdQuery } from "../../hooks/useReviewById";
 import { useRecommendationMovieByIdQuery } from "../../hooks/useRecommedationMovieById";
 import MovieCard from "../../common/MovieCard/MovieCard";
-import PreviewModal from "./PreviewModal";
+import PreviewModal from "./components/PreviewModal";
 
 const MovieDetailpage = () => {
   const navigate = useNavigate();
@@ -58,7 +58,9 @@ const MovieDetailpage = () => {
       <PreviewModal
         isModalShow={isModalShow}
         handleModalClose={handleModalClose}
+        id={id}
       />
+
       <Row style={{ height: "70vh" }}>
         <Col
           lg={4}

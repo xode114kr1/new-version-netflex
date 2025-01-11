@@ -67,6 +67,10 @@
     margin-right: 10px;
 }
 
+.modal-contanier{
+    border: 2px solid red;
+}
+
 .button-contanier{
     margin-bottom: 70px;
     display: flex;
