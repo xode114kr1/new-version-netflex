@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchMovieQuery } from "../../hooks/useSearchMovie";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import "./Moviespage.style.css";
+import SortBox from "./components/SortBox";
 
 // 경로 2가지
 // 1. nav 바에서 클릭해서 온 경우 => popularMovie 보여줌
@@ -13,7 +14,11 @@ import "./Moviespage.style.css";
 const Moviespage = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useSearchParams();
+
   const [page, setPage] = useState(1);
+  const [sortedMovies, setSortedMovies] = useState([]);
+  const [sortBy, setSortBy] = useState("none");
+
   const keyword = query.get("q");
   const { data, isloading, isError, error } = useSearchMovieQuery({
     keyword,
@@ -27,6 +32,44 @@ const Moviespage = () => {
   const handlePageChange = ({ selected }) => {
     setPage(selected + 1);
   };
+
+  const sortMovies = (keyword) => {
+    setSortBy(keyword);
+    if (keyword === "none") {
+      const sorted = [...data?.results];
+      setSortedMovies(sorted);
+    }
+    if (keyword === "Popularity(Asc)") {
+      const sorted = [...data?.results].sort(
+        (a, b) => a.popularity - b.popularity
+      );
+      setSortedMovies(sorted);
+    }
+    if (keyword === "Popularity(Desc)") {
+      const sorted = [...data?.results].sort(
+        (a, b) => b.popularity - a.popularity
+      );
+      setSortedMovies(sorted);
+    }
+    if (keyword === "Vote(Asc)") {
+      const sorted = [...data?.results].sort(
+        (a, b) => a.vote_average - b.vote_average
+      );
+      setSortedMovies(sorted);
+    }
+    if (keyword === "Vote(Desc)") {
+      const sorted = [...data?.results].sort(
+        (a, b) => b.vote_average - a.vote_average
+      );
+      setSortedMovies(sorted);
+    }
+  };
+
+  useEffect(() => {
+    if (data && data?.results) {
+      setSortedMovies(data?.results);
+    }
+  }, [data]);
 
   if (isloading) {
     return (
@@ -42,15 +85,16 @@ const Moviespage = () => {
   if (isError) {
     return <Alert variant="danger">{error.message}</Alert>;
   }
+
   return (
-    <Container>
+    <Container className="contanier moviepage">
       <Row>
         <Col lg={4} sm={12} xs={12} className="filter-contanier">
-          필터
+          <SortBox sortBy={sortBy} sortMovies={sortMovies} />
         </Col>
         <Col lg={8} sm={12} xs={12}>
           <Row>
-            {data?.results.map((movie, index) => (
+            {sortedMovies?.map((movie, index) => (
               <Col key={index} lg={4} sm={6} xs={12}>
                 <MovieCard
                   movie={movie}

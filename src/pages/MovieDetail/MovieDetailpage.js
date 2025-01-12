@@ -93,16 +93,16 @@ const MovieDetailpage = () => {
             <div>$ {formattedBudget}</div>
           </div>
           <div className="detail-etc-contanier">
-            <div className="etc-box">revenue</div>
+            <div className="etc-box">Revenue</div>
             <div>$ {formattedRevenue}</div>
           </div>
           <div className="detail-etc-contanier">
-            <div className="etc-box">release date</div>
+            <div className="etc-box">Release Date</div>
             <div> {movie.release_date}</div>
           </div>
           <div className="detail-etc-contanier">
-            <div className="etc-box">runtime</div>
-            <div> {movie.runtime}분</div>
+            <div className="etc-box">Run Time</div>
+            <div> {movie.runtime} min</div>
           </div>
         </Col>
       </Row>

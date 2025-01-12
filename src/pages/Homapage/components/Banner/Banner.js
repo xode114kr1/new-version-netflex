@@ -5,7 +5,6 @@ import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
 
 const Banner = () => {
   const { data, isLoading, isError, error } = usePopularMoviesQuery();
-  console.log("ddd", data);
   if (isLoading) {
     <h1>Loading... </h1>;
     return;
@@ -26,7 +25,7 @@ const Banner = () => {
     >
       <div className="text-white banner-text-area">
         <h1>{data.results[0].title}</h1>
-        <p>{data.results[0].overview}</p>
+        <p className="banner-overview">{data.results[0].overview}</p>
       </div>
     </div>
   );
