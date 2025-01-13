@@ -113,7 +113,7 @@ const Moviespage = () => {
 
   return (
     <Container className="contanier moviepage">
-      <Row>
+      {/* <Row>
         <Col lg={4} sm={12} xs={12}>
           <div className="filter-contanier">
             <SortBox
@@ -179,7 +179,7 @@ const Moviespage = () => {
           activeClassName="active"
           forcePage={page - 1}
         />
-      </div>
+      </div> */}
     </Container>
   );
 };
