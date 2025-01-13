@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./MovieDetailpage.style.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFineMovieByIdQuery } from "../../hooks/useFindMovieById";
-import { Alert, Col, Container, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useReviewByIdQuery } from "../../hooks/useReviewById";
 import { useRecommendationMovieByIdQuery } from "../../hooks/useRecommedationMovieById";
 import MovieCard from "../../common/MovieCard/MovieCard";
@@ -29,7 +29,15 @@ const MovieDetailpage = () => {
   const formattedRevenue = new Intl.NumberFormat("en-US").format(revenue);
 
   if (isLoaing || !movie || !reviews || !recommendationMovie) {
-    return <h1>Loading</h1>;
+    return (
+      <div className="spinner-area">
+        <Spinner
+          animation="border"
+          variant="danger"
+          style={{ width: "5rem", height: "5rem" }}
+        />
+      </div>
+    );
   }
   if (isError) {
     return <Alert variant="danger">{error}</Alert>;

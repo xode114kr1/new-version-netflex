@@ -10,7 +10,54 @@
 }
 
 .filter-contanier{
+  margin: 10px 0;
   display: flex;
+  gap: 15px;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+.filter-Box{
+  border: 2px solid #a10000;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.genre-button{
+  position: relative;
+  background-color: #222222;
+  font-size: 20px;
+  margin: 3px;
+  border:none;
+  color: #c7c7c7;
+  border-radius: 5px;
+  z-index: 1;
+  overflow: hidden;
+
+}
+
+.genre-button.clicked{
+  background: linear-gradient(to right, #ff5733, #ffc300);
+  color: black;
+  border: none;
+}
+
+.genre-button::before {
+  content: "";
+  position: absolute;
+  left: -100%; /* 시작 위치: 버튼의 왼쪽 밖 */
+  width: 100%; /* 넉넉한 너비로 전체 덮기 */
+  height: 100%;
+  background: linear-gradient(to right, #ff5733, #ffc300); /* 그라데이션 색상 */
+  z-index: -1; /* 버튼 텍스트 뒤로 배경 배치 */
+  transition: all 0.4s ease; /* 애니메이션 지속 시간 */
+}
+
+.genre-button:hover::before {
+  left: 0; /* 배경이 버튼을 덮도록 이동 */
+}
+
+.genre-button:hover {
+  color: #000;
 }

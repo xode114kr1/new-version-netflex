@@ -3,11 +3,12 @@ import "./SortBox.style.css";
 import { Col, Container, Dropdown, Row } from "react-bootstrap";
 import { FiAlignJustify, FiX } from "react-icons/fi";
 
-const SortBox = ({ sortBy, sortMovies }) => {
+const SortBox = ({ sortBy, setSortBy, sortMovies }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleSortByButton = (keyword) => {
-    sortMovies(keyword);
+    setSortBy(keyword);
+    // sortMovies(keyword);
     setIsOpen(true);
   };
   const handleSortListClick = () => {
