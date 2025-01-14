@@ -62,14 +62,14 @@ const MovieDetailpage = () => {
   };
 
   return (
-    <Container style={{ padding: "2rem" }}>
+    <Container style={{ padding: "2rem", margin: "0px" }}>
       <PreviewModal
         isModalShow={isModalShow}
         handleModalClose={handleModalClose}
         id={id}
       />
 
-      <Row style={{ height: "70vh" }}>
+      <Row>
         <Col
           lg={4}
           sm={0}
