@@ -146,7 +146,13 @@ const MovieDetailpage = () => {
         <Col style={{ display: isRecommendationMovieShow ? "block" : "none" }}>
           <Row>
             {recommendationMovie.map((movie, index) => (
-              <Col>
+              <Col
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 {" "}
                 <MovieCard
                   movie={movie}

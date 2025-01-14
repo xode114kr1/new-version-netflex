@@ -93,6 +93,9 @@
     border: 2px solid rgb(105, 105, 105);
     border-radius: 15px;
     color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     transition: background-color 0.3s ease;
 }
 
