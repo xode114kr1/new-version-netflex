@@ -1,4 +1,4 @@
-.contanier.moviepage{
+.contanier.moviepage {
   padding: 20px;
   padding-top: 30px;
 }
@@ -9,7 +9,7 @@
   justify-content: center;
 }
 
-.filter-contanier{
+.filter-contanier {
   margin: 10px 0;
   display: flex;
   gap: 15px;
@@ -18,26 +18,25 @@
   align-items: center;
 }
 
-.filter-Box{
+.filter-Box {
   border: 2px solid #a10000;
   border-radius: 15px;
   padding: 10px;
 }
 
-.genre-button{
+.genre-button {
   position: relative;
   background-color: #222222;
   font-size: 20px;
   margin: 3px;
-  border:none;
+  border: none;
   color: #c7c7c7;
   border-radius: 5px;
   z-index: 1;
   overflow: hidden;
-
 }
 
-.genre-button.clicked{
+.genre-button.clicked {
   background: linear-gradient(to right, #ff5733, #ffc300);
   color: black;
   border: none;
@@ -60,4 +59,43 @@
 
 .genre-button:hover {
   color: #000;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  background-color: #bbbbbb;
+  color: #555555;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.page-link:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.active .page-link {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.page-item.disabled .page-link {
+  background-color: #bbbbbb;
+  color: #555555;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
 }
